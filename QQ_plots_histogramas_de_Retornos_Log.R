@@ -29,3 +29,14 @@ plot_log_returns <- function(ticker, start_date, end_date) {
 }
 #Llamamos solo 1 vez la funcion con la compañia y fecha desada
 plot_log_returns("NWS", "2013-01-01", "2023-01-01")
+
+#Llamamsos a la funcion con todos los nombres en una fechaa predeterminada para poder descargar todas las graficas
+i=1
+#Sacamos todos lo tickets de las empresas 
+companies <- unique(sp_500$symbol)
+#Llamamos la función para todas las empresas en las fechas deseadas
+for (ticker in companies) {
+  plot_log_returns(ticker, "2013-01-01", "2023-01-01")
+  print(i)
+  i<-i+1
+}
