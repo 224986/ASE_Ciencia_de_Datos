@@ -1,5 +1,6 @@
 library(tidyquant)
 library(ggplot2)
+library(gridExtra)
 
 #Descargamos toda la informacion disponible de todos los activos dentro del SP500
 sp_500 <- tq_index("SP500") %>% tq_get(get="stock.prices")
@@ -20,6 +21,11 @@ plot_log_returns <- function(ticker, start_date, end_date) {
   
   #Utilizamos la libreria grid extra para poder organizar en las garfocas una alado de la otra 
   grid.arrange(p1,p2, nrow=1) 
- }
+  
+  #Para poder usar y visualizar las garfcas con mayor comidadi se descaegan en formato png
+  ext<-".png"
+  ggsave(filename = paste(ticker,ext), plot = grid.arrange(p1,p2, nrow=1), width = 15, height = 8)
+  
+}
 #Llamamos solo 1 vez la funcion con la compañia y fecha desada
 plot_log_returns("NWS", "2013-01-01", "2023-01-01")
