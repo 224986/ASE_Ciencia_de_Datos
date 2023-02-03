@@ -14,10 +14,12 @@ plot_log_returns <- function(ticker, start_date, end_date) {
   #Calcualmos los retornos logratimicos con esta base filtarda
   stock_returns <- diff(log(stock_prices$close))
   
-  #Creamos las graficas de qq plot e hitorgrama
-  ggplot(data.frame(stock_returns),aes(sample = stock_returns))+stat_qq()+stat_qq_line(color="red")+ggtitle(paste0(ticker, " Daily Log Returns (", start_date, " to ", end_date, ")")) 
-  ggplot(data.frame(stock_returns),aes(x = stock_returns))+geom_histogram(fill = "blue", alpha = 0.5)+labs(x = "Log Returns", y = "Frequency")
+  #Creamos las graficas de qq plot e hitorgrama, e igualamos a otra variable para poder organizar las graficas
+  p1<-ggplot(data.frame(stock_returns),aes(sample = stock_returns))+stat_qq()+stat_qq_line(color="red")+ggtitle(paste0(ticker, " Daily Log Returns (", start_date, " to ", end_date, ")")) 
+  p2<-ggplot(data.frame(stock_returns),aes(x = stock_returns))+geom_histogram(fill = "blue", alpha = 0.5)+labs(x = "Log Returns", y = "Frequency")
   
+  #Utilizamos la libreria grid extra para poder organizar en las garfocas una alado de la otra 
+  grid.arrange(p1,p2, nrow=1) 
  }
 #Llamamos solo 1 vez la funcion con la compañia y fecha desada
 plot_log_returns("NWS", "2013-01-01", "2023-01-01")
