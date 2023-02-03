@@ -11,6 +11,8 @@ plot_log_returns <- function(ticker, start_date, end_date) {
   stock_prices <- sp_500 %>%
     filter(symbol == ticker) %>%
     filter(date >= start_date & date <= end_date)
+  #Calcualmos los retornos logratimicos con esta base filtarda
+  stock_returns <- diff(log(stock_prices$close))
  }
 #Llamamos solo 1 vez la funcion con la compañia y fecha desada
 plot_log_returns("NWS", "2013-01-01", "2023-01-01")
