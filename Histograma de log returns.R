@@ -20,3 +20,7 @@ plot_log_returns <- function(ticker, start_date, end_date) {
 }
 
 plot_log_returns("KR", "2022-01-01", "2022-12-31")
+
+
+
+
