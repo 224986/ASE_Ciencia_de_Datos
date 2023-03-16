@@ -10,12 +10,14 @@ plot_log_returns_coralation <- function(ticker, start_date, end_date) {
   stock_prices <- sp_500 %>%
     filter(symbol == ticker) %>%
     filter(date >= start_date & date <= end_date)
-  log_returns <- diff(log(stock_prices$close))
-  stock_returns <- diff(log(stock_prices$close))
+  log_returns <- diff(log(stock_prices$adjusted))
+  stock_returns <- diff(log(stock_prices$adjusted))
+  
   ggAcf(log_returns, lag.max = 30) + #Funcion que grafica la cutocorelacion con lag hastas de 30 
     labs(x = "Lag", y = "Autocorrelation", title = paste(ticker, "Autocorrelation")) +
     theme_bw()
   
 }
+models_df <- data.frame(model_name = character(), model_count = integer(), stringsAsFactors = FALSE)
 
 plot_log_returns_coralation("AAPL", "2022-01-01", "2022-12-31")

@@ -7,7 +7,9 @@ library(tseries)
 sp_500 <- readRDS("/Users/ljeg/Documents/GitHub/ASE_Ciencia_de_Datos/Base_SP500.rds")
 models_df <- data.frame(name = character(), AR = integer(), I = integer(),  MA = integer(), stringsAsFactors = FALSE)
 
-model_log_returns <- function(ticker, start_date, end_date, models_df) {
+model_log_returns <- function(ticker, 
+                              start_date = "2022-01-01",
+                              end_date = "2022-12-31") {
   
   # Calculamos los retornos
   stock_prices <- sp_500 %>%
@@ -20,16 +22,7 @@ model_log_returns <- function(ticker, start_date, end_date, models_df) {
   
   
   # Creamos un vector con los resultados del modelo ajustado
-  model_results <- c(name = ticker, AR = arima_model$arma[1], I = arima_model$arma[2], MA = arima_model$arma[6])
-  print(model_results)
-  # Agregamos el vector al data frame de modelos
- 
-  
-  # Mostramos el modelo en pantalla
-  #print(m_name)
-  #print(arima_model)
-  
+  c(AR = arima_model$arma[1], I = arima_model$arma[2], MA = arima_model$arma[6])
 }
 
-model_log_returns("AAPL", "2022-01-01", "2022-12-31", models_df)
-print(models_df)
+

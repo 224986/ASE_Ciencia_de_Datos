@@ -15,7 +15,7 @@ plot_log_returns_tsdisplay <- function(ticker, start_date, end_date) {
   log_returns <- diff(log(stock_prices$close))
   
   # Graficamos la autocorrelación
-  tsdisplay(log_returns, lag.max = 10, main = paste(ticker, "Autocorrelation"))
+  tsdisplay(log_returns, lag.max = 9, main = paste(ticker, "Autocorrelation"))
   
 }
 

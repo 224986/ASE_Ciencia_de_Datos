@@ -12,7 +12,7 @@ model_log_returns <- function(ticker, start_date, end_date, models_df=NULL) {
   stock_prices <- sp_500 %>%
     filter(symbol == ticker) %>%
     filter(date >= start_date & date <= end_date)
-  log_returns <- diff(log(stock_prices$close))
+  log_returns <- diff(log(stock_prices$adjusted))
   
   # Determinamos el modelo ARIMA que mejor ajusta a los datos de log returns
   arima_model <- auto.arima(log_returns)
@@ -33,7 +33,7 @@ model_log_returns <- function(ticker, start_date, end_date, models_df=NULL) {
   #print(arima_model)
   
 }
-
+model_log_returns("AAPL", "2022-01-01", "2022-12-31", models_df)
 i=0;
 companies <- unique(sp_500$symbol)
 #Llamamos la función para todas las empresas en las fechas deseadas
@@ -46,3 +46,6 @@ for (ticker in companies) {
 
 sum_vector <- c(sum(as.numeric(models_df[, 2])), sum(as.numeric(models_df[, 3])), sum(as.numeric(models_df[, 4])))
 print(sum_vector )
+
+
+
